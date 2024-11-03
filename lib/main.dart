@@ -4,20 +4,48 @@ void main() {
   runApp(const App());
 }
 
-class App extends StatelessWidget {
+class App extends StatefulWidget {
   const App({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(home: HomePage());
-  }
+  State<App> createState() => _AppState();
 }
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class _AppState extends State<App> {
+  int counter = 0;
+
+  void onClicked() {
+    setState(() {
+      counter++;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return const Text('Hello, World!');
+    return MaterialApp(
+      home: Scaffold(
+        backgroundColor: const Color(0xfff4eddb),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                'click count',
+                style: TextStyle(fontSize: 30),
+              ),
+              Text(
+                '$counter',
+                style: const TextStyle(fontSize: 30),
+              ),
+              IconButton(
+                iconSize: 40,
+                onPressed: onClicked,
+                icon: const Icon(Icons.add_box_rounded),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
